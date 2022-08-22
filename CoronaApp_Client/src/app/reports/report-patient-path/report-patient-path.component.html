@@ -1,0 +1,94 @@
+<h1>Report Your Path</h1>
+
+<div class="input-group mb-3 patientId margin-left">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">#</span>
+  </div>
+  <input
+    type="text"
+    class="form-control"
+    placeholder="patientId"
+    aria-label="patientId"
+    aria-describedby="basic-addon1"
+    [(ngModel)]="userId"
+    (ngModelChange)="getReports()"
+  />
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Start Date</th>
+      <th scope="col">End Date</th>
+      <th scope="col">City</th>
+      <th scope="col">Address</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let report of reports; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ report.startDate | date: "short" }}</td>
+      <td>{{ report.endDate | date: "short" }}</td>
+      <td>{{ report.city }}</td>
+      <td>{{ report.address }}</td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="RemoveReport(report.id)"
+        >
+          <i class="bi bi-trash"></i>
+        </button>
+      </td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>
+        <input
+          type="datetime-local"
+          class="form-control"
+          placeholder="startDate"
+          aria-label="startDate"
+          aria-describedby="basic-addon1"
+          [(ngModel)]="newStartDate"
+        />
+      </td>
+      <td>
+        <input
+          type="datetime-local"
+          class="form-control"
+          placeholder="endDate"
+          aria-label="endDate"
+          aria-describedby="basic-addon1"
+          [(ngModel)]="newEndDate"
+        />
+      </td>
+      <td>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="city"
+          aria-label="city"
+          aria-describedby="basic-addon1"
+          [(ngModel)]="newCity"
+        />
+      </td>
+      <td>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="address"
+          aria-label="address"
+          aria-describedby="basic-addon1"
+          [(ngModel)]="newAddress"
+        />
+      </td>
+      <td>
+        <button type="button" class="btn btn-primary" (click)="addReport()">
+          Add
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

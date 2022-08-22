@@ -1,0 +1,101 @@
+<h1>Report Patient Path-form</h1>
+
+<form
+  class="normal-width needs-validation"
+  [formGroup]="reportForm"
+  (ngSubmit)="onFormSubmit()"
+  novalidate
+  *ngIf="showForm"
+>
+  <div class="form-group">
+    <label for="userId">userId</label>
+    <input
+      type="text"
+      class="form-control"
+      id="userId"
+      placeholder="userId"
+      formControlName="userId"
+      name="userId"
+      required
+    />
+  </div>
+  <small class="validation-error">{{ getError("userId") }}</small>
+
+  <div class="form-group">
+    <label for="startDate">startDate</label>
+    <input
+      type="datetime-local"
+      class="form-control"
+      id="startDate"
+      placeholder="startDate"
+      formControlName="startDate"
+    />
+  </div>
+  <small class="validation-error">{{ getError("startDate") }}</small>
+
+  <div class="form-group">
+    <label for="endDate">endDate</label>
+    <input
+      type="datetime-local"
+      class="form-control"
+      id="endDate"
+      placeholder="endDate"
+      formControlName="endDate"
+    />
+  </div>
+  <small class="validation-error">{{ getError("endDate") }}</small>
+
+  <div class="form-group">
+    <label for="city">city</label>
+    <input
+      type="text"
+      class="form-control"
+      id="city"
+      placeholder="city"
+      formControlName="city"
+    />
+  </div>
+  <small class="validation-error">{{ getError("city") }}</small>
+
+  <div class="form-group">
+    <label for="address">address</label>
+    <input
+      type="text"
+      class="form-control"
+      id="address"
+      placeholder="address"
+      formControlName="address"
+    />
+  </div>
+  <small class="validation-error">{{ getError("address") }}</small>
+
+  <br />
+  <small class="form-text text-muted"
+    >We'll never share your information with anyone else.</small
+  >
+  <button
+    type="submit"
+    class="btn btn-primary submit"
+    [disabled]="reportForm.status == 'INVALID' || datesError"
+  >
+    Submit
+  </button>
+</form>
+
+<div class="alert alert-danger normal-width" role="alert" *ngIf="datesError">
+  {{ getError("datesRange") }}
+</div>
+
+<div class="normal-width" *ngIf="!showForm">
+  <div class="alert alert-success alert-dismissible fade show">
+    <strong>Success!</strong> Your report has been sent successfully.
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
+  <button type="button" class="btn btn-primary" (click)="openForm()">
+    Report next
+  </button>
+  <br /><br />
+  <button type="button" class="btn btn-light">
+    <a href="#">Back to Home page.</a>
+  </button>
+</div>
